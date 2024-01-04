@@ -17,7 +17,11 @@ function playRound(computerSelection, playerSelection) {
     if (computerSelection === ROCK) {
         switch (playerSelection) {
             case ROCK:
-                message = "Account for TIES by re-playing the round";
+                console.log("TIES, re-playing the round");
+                const computerSelection = getComputerChoice();
+                const playerSelection = getPlayerChoice();
+                message = playRound(computerSelection, playerSelection);
+                // message = "Account for TIES by re-playing the round";
                 break;
             case PAPER:
                 message = "You winner! Paper beats Rock";
@@ -32,7 +36,11 @@ function playRound(computerSelection, playerSelection) {
                 message = "You lose! Paper beats Rock";
                 break;
             case PAPER:
-                message = "Account for TIES by re-playing the round";
+                console.log("TIES, re-playing the round");
+                const computerSelection = getComputerChoice();
+                const playerSelection = getPlayerChoice();
+                message = playRound(computerSelection, playerSelection);
+                // message = "Account for TIES by re-playing the round";
                 break;
             case SCISSORS:
                 message = "You winner! Scissors beats Paper";
@@ -47,7 +55,11 @@ function playRound(computerSelection, playerSelection) {
                 message = "You lose! Scissors beats Paper";
                 break;
             case SCISSORS:
-                message = "Account for TIES by re-playing the round";
+                console.log("TIES, re-playing the round");
+                const computerSelection = getComputerChoice();
+                const playerSelection = getPlayerChoice();
+                message = playRound(computerSelection, playerSelection);
+                // message = "Account for TIES by re-playing the round";
                 break;
         }
     }
@@ -59,30 +71,34 @@ function counter(counter) {
 }
 
 function getPlayerChoice() {
+    // If player enter other string, player repeat selection 
     const playerSelection = prompt("Select rock, paper or scissors: ");
     return playerSelection.toLowerCase();
 }
 
 function play() {
 
-    // for(let i=0; i<=5; i++){
-    //     const computerSelection = getComputerChoice();
-    //     const playerSelection = getPlayerChoice();
-    //     const resultPlayRound = playRound(computerSelection, playerSelection);
-    //     if(resultPlayRound.substring(0, 7) == "Account"){
-    //         continue;
-    //     }
-    // }
 
-
-    let resultPlayRound = '';
-    do {
+    let playing = true;
+    let consoleMarker = 0;
+    let playerMarker = 0;
+    let message = '';
+    let round = 0;
+    while (playing) {
         const computerSelection = getComputerChoice();
         const playerSelection = getPlayerChoice();
-        const resultPlayRound = playRound(computerSelection, playerSelection);
-        console.log(resultPlayRound);
-        console.log(resultPlayRound.substring(0, 7));
-    } while (resultPlayRound.substring(0, 7) == "Account")
+        message = playRound(computerSelection, playerSelection);
+        round = counter(round);
+        message.includes('winner!') ? playerMarker++ : consoleMarker++;
+        console.log(`Round ${round}`);
+        console.log(message);
+        console.log(`Player ${playerMarker} vs Console ${consoleMarker}`);
+        if (consoleMarker >= 5 || playerMarker >= 5) {
+            console.log(`Game over`);
+            break;
+        }
+    }
+
 
 }
 
