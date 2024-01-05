@@ -21,7 +21,6 @@ function playRound(computerSelection, playerSelection) {
                 const computerSelection = getComputerChoice();
                 const playerSelection = getPlayerChoice();
                 message = playRound(computerSelection, playerSelection);
-                // message = "Account for TIES by re-playing the round";
                 break;
             case PAPER:
                 message = "You winner! Paper beats Rock";
@@ -40,7 +39,6 @@ function playRound(computerSelection, playerSelection) {
                 const computerSelection = getComputerChoice();
                 const playerSelection = getPlayerChoice();
                 message = playRound(computerSelection, playerSelection);
-                // message = "Account for TIES by re-playing the round";
                 break;
             case SCISSORS:
                 message = "You winner! Scissors beats Paper";
@@ -59,7 +57,6 @@ function playRound(computerSelection, playerSelection) {
                 const computerSelection = getComputerChoice();
                 const playerSelection = getPlayerChoice();
                 message = playRound(computerSelection, playerSelection);
-                // message = "Account for TIES by re-playing the round";
                 break;
         }
     }
@@ -71,9 +68,12 @@ function counter(counter) {
 }
 
 function getPlayerChoice() {
-    // If player enter other string, player repeat selection 
-    const playerSelection = prompt("Select rock, paper or scissors: ");
-    return playerSelection.toLowerCase();
+    let playerSelection = '';
+    while (!(playerSelection === ROCK || playerSelection === PAPER || playerSelection === SCISSORS)) {
+        playerSelection = prompt("Select rock, paper or scissors: ");
+        playerSelection = playerSelection.toLocaleLowerCase();
+    }
+    return playerSelection;
 }
 
 function play() {
